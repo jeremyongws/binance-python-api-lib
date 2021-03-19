@@ -1,2 +1,2 @@
 # binance-python-api-lib
-personal library for api calls
+Personal library for pulling historical data from Binance fapi
