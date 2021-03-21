@@ -36,7 +36,7 @@ def getKlineData(pair,interval='1d'):
         formatted_data.append(day_data)
     return formatted_data
 
-with open("pairs.csv","r") as pairs_csv:
+with open("shitcoin_pairs.csv","r") as pairs_csv:
      csv_reader = csv.reader(pairs_csv, delimiter=',')
      pairs = list(csv_reader)[1:] #remove header row
 
@@ -52,11 +52,7 @@ titles = [
 "Quote/Base Asset Volume","No. of Trades"]
 
 with open('data.csv','w+') as f:
-    writer = csv.writer(f) 
+    writer = csv.writer(f)
     writer.writerow(titles)
     writer.writerows(results)
     print("Data written to data.csv")
-
-
-
-
