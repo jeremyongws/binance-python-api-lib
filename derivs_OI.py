@@ -4,8 +4,8 @@ import pdb
 from datetime import datetime
 import csv
 
-DERIV_URL = 'https://dapi.binance.com/dapi/v1/openInterestHist?'
-FUT_URL = 'https://fapi.binance.com/fapi/v1/openInterestHist?'
+DERIV_URL = 'https://dapi.binance.com/futures/data/openInterestHist?'
+# FUT_URL = 'https://fapi.binance.com/futures/data/openInterestHist?'
 interval = '1d'
 contract_type = 'PERPETUAL'
 
@@ -19,17 +19,19 @@ def getOIData(pair,interval='1d'):
     symbol,api = pair
     if api == "dapi":
         req_url = DERIV_URL
-    elif api == "fapi":
-        req_url = FUT_URL
+    # elif api == "fapi":
+    #     req_url = FUT_URL
     else:
         return "ERROR! Bad API Request url."
     print(req_url)
-    req_url += 'pair='+symbol+'&period='+interval+'&limit=500'+'&contractType='+contract_type
+    req_url += 'pair='+symbol+'&period='+interval+'&limit=1000'+'&contractType='+contract_type
     res = requests.get(req_url)
     data = res.json()
+    # pdb.set_trace()
     formatted_data = []
     for day_data in data:
         #Convert open & close time to human readable format
+        pdb.set_trace()
         day_data[0],day_data[6] = timestamp_to_date(day_data[0]),timestamp_to_date(day_data[6])
         #remove some useless data at end of array
         day_data = day_data[:-3 or None]
